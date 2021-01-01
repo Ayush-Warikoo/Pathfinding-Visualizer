@@ -3,7 +3,37 @@
     border: 1px solid black;
     height: 25px;
     width: 25px;
-    background-color: #555;
+    background-color: rgb(200, 200, 200);
     display: inline-block;
     margin-bottom: -4px;
 }
+
+.Cell:active {
+    transform: scale(0.80);
+}
+
+.Cell__None {
+    background-color: rgb(200, 200, 200);
+}
+
+.Cell__Visited {
+    background-color:  rgb(100, 100, 100);
+}
+
+.Cell__NotVisited {
+    background-color: rgb(200, 200, 200);
+}
+
+.Cell__Start {
+    background-color: red;
+}
+
+.Cell__Finish {
+    background-color: green;
+}
+
+.Cell__Wall {
+    background-color: black;
+}
+
+
