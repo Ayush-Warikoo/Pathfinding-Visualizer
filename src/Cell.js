@@ -5,16 +5,13 @@ import {headerSelect} from './action/index';
 
 function Cell({ cell }) {
     let headerState = useSelector(state => state.headerState);
-    console.log(headerState);
+    //console.log(headerState);
     //const dispatch = useDispatch();
     //dispatch(headerSelect("Finish"));
     //console.log(headerState);
 
     const [cellState, setCellState] = useState(cell.state);
-    const [cellVisited, setCellVisited] = useState(cell.visited);
-
-
-    
+    const [cellVisited, setCellVisited] = useState(cell.visited);    
 
     useEffect(() => {
 
@@ -29,25 +26,62 @@ function Cell({ cell }) {
         return "NotVisited";
     }
 
-    const onMouseDown = () =>
+    
+    const onMouseDown = (e) =>
     {
-        if(headerState === "Wall" && cellState !== "Start" && cellState !== "Finish")
+        if(headerState === "Wall" && e.buttons === 1)
         {
-            setCellState("Wall");
+            if(cellState === "Wall")
+            {
+                setCellState("None");
+            }
+            else if(cellState !== "Start" && cellState !== "Finish")
+            {
+                setCellState("Wall");
+            }
         }
-        else if(headerState === "Weight" && cellState !== "Start" && cellState !== "Finish")
+        else if(headerState === "Weight" && e.buttons === 1)
         {
-            setCellState("Weight");
+            if(cellState === "Weight")
+            {
+                setCellState("None");
+            }
+            else if(cellState !== "Start" && cellState !== "Finish")
+            {
+                setCellState("Weight");
+            }
         }
-        cell.state = cellState;        
+        cell.state = cellState;
     }
 
-    const onMouseEnter = () =>
+    const onMouseEnter = (e) =>
     {
-
+        if(headerState === "Wall" && e.buttons === 1)
+        {
+            if(cellState === "Wall")
+            {
+                setCellState("None");
+            }
+            else if(cellState !== "Start" && cellState !== "Finish")
+            {
+                setCellState("Wall");
+            }
+        }
+        else if(headerState === "Weight" && e.buttons === 1)
+        {
+            if(cellState === "Weight")
+            {
+                setCellState("None");
+            }
+            else if(cellState !== "Start" && cellState !== "Finish")
+            {
+                setCellState("Weight");
+            }
+        }
+        cell.state = cellState;
     }
 
-    const onMouseUp = () =>
+    const onMouseUp = (e) =>
     {
         if(headerState === "Start" && cellState !== "Finish")
         {
