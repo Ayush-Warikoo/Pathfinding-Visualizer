@@ -38,56 +38,19 @@ function MainPage() {
         }
         setGrid(grid);
     }, [])
-
-    /*
-    const renderGrid = () =>
-    {
-        grid.map((row, indexR) => {
-            console.log("A");
-            return (
-                <div className="Grid__row">
-                    {renderRow(row, indexR)}
-                    {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]} />)}
-                </div>
-            )
-        })
-        
-        for(let row = 0; row < grid.length; row++)
-        {
-            return (
-                <div className="Grid__row">
-                    {renderRow(grid[row])} 
-                </div>
-            );
-        }
-        
-    }
-
-    const renderRow = (row, rowInd) =>
-    {
-        console.log("B");
-        for(let colInd = 0; colInd < row.length; colInd++)
-        {
-            <Cell cell = {grid[rowInd][colInd]} />;
-            console.log("INSIDE");
-        }
-    }
-    */
     
-
     return (
-        <div className="MainPage">
+        <div className="MainPage" >
             <Header/>
-            <div className="Grid">
+            <div className="Grid" >
                 {grid.map((row, indexR) => {
                     return (
-                        <div className="Grid__row"> 
+                        <div className="Grid__Row"> 
                             {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]} />)} 
                         </div>
                     )
                 })}
-            </div>
-            
+            </div>       
         </div>
     )
 }

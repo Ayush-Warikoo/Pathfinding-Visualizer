@@ -11,10 +11,12 @@ import allReducers from './reducer/index';
 let store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 //Display it in console
-store.subscribe(() => console.log(store.getState()));
+//store.subscribe(() => console.log(store.getState()));
 
-//Dispatch: Executing the action
-//store.dispatch(headerSelect("Finish")); 
+//Prevent dragging
+window.ondragstart = function () {return false;}
+
+
 
 ReactDOM.render(
   <React.StrictMode>
