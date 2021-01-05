@@ -2,11 +2,11 @@ import React, {useState, useEffect } from 'react';
 import Header from './Header';
 import Cell  from './Cell';
 import './MainPage.css';
+import {useSelector} from 'react-redux';
 
-function MainPage() {
-
-    const STARTING_CELL = [0, 0];
-    const FINISHING_CELL = [19, 49];
+function MainPage() {   
+    const STARTING_CELL = useSelector(state => state.startCell); //start
+    const FINISHING_CELL = useSelector(state => state.finishCell); //finish
 
     const [grid, setGrid] = useState([]);
 

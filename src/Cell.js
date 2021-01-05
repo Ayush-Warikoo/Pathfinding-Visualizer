@@ -1,21 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import './Cell.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {headerSelect} from './action/index';
+import { setStart, setFinish } from './action/index';
+
 
 function Cell({ cell }) {
     let headerState = useSelector(state => state.headerState);
-    //console.log(headerState);
-    //const dispatch = useDispatch();
-    //dispatch(headerSelect("Finish"));
-    //console.log(headerState);
+    let startCell = useSelector(state => state.startCell);
+    let finishCell = useSelector(state => state.finishCell);
+    const dispatch = useDispatch();
 
     const [cellState, setCellState] = useState(cell.state);
-    const [cellVisited, setCellVisited] = useState(cell.visited);    
+    const [cellVisited, setCellVisited] = useState(cell.visited);  
 
     useEffect(() => {
-
-    }, [cell])
+        if(((cellState === "Start" || cell.state === "Start") && !(cell.row === startCell[0] && cell.col === startCell[1]))
+        || ((cellState === "Finish" || cell.state === "Finish") && !(cell.row === finishCell[0] && cell.col === finishCell[1])))
+        {
+            setCellState("None");
+            cell.state = "None";
+        }
+    }, [startCell, finishCell])
 
     const isVisitedClass = () =>
     {
@@ -86,10 +91,12 @@ function Cell({ cell }) {
         if(headerState === "Start" && cellState !== "Finish")
         {
             setCellState("Start");
+            dispatch(setStart([cell.row, cell.col]));
         }
         else if(headerState === "Finish" && cellState !== "Start")
         {
             setCellState("Finish");
+            dispatch(setFinish([cell.row, cell.col]));
         }
         cell.state = cellState;
     }

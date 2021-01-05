@@ -8,9 +8,10 @@
     margin-bottom: -4px;
 }
 
+/*
 .Cell:active {
-    /*transform: scale(0.80);*/
 }
+*/
 
 .Cell__None {
     background-color: rgb(200, 200, 200);

@@ -1,11 +1,13 @@
-const headerState = (state = "Start", action) => {
+
+const startCell = (state = [0,0], action) => {
     switch(action.type)
     {
-        case "HEADER_SELECT":
+        case "SET_START":
             return action.payload;
         default:
             return state;
     }
 }
 
-export default headerState;
+export default startCell;
+

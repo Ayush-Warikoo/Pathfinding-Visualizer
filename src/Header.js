@@ -8,6 +8,7 @@ function Header() {
 
     return (
         <div className="Header">
+            
             <div className="Header__Start" onClick={() => dispatch(headerSelect("Start"))}> 
                 <h2> Start </h2>
             </div>
