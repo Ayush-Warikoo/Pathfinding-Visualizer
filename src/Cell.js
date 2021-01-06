@@ -6,21 +6,19 @@ import { setStart, setFinish } from './action/index';
 
 function Cell({ cell }) {
     let headerState = useSelector(state => state.headerState);
-    let startCell = useSelector(state => state.startCell);
-    let finishCell = useSelector(state => state.finishCell);
+    let startCellCoord = useSelector(state => state.startCell);
+    let finishCellCoord = useSelector(state => state.finishCell);
     const dispatch = useDispatch();
 
-    const [cellState, setCellState] = useState(cell.state);
-    const [cellVisited, setCellVisited] = useState(cell.visited);  
+    const isStartCell = () =>
+    {
+        return (cell.row === startCellCoord[0] && cell.col === startCellCoord[1]);
+    }
 
-    useEffect(() => {
-        if(((cellState === "Start" || cell.state === "Start") && !(cell.row === startCell[0] && cell.col === startCell[1]))
-        || ((cellState === "Finish" || cell.state === "Finish") && !(cell.row === finishCell[0] && cell.col === finishCell[1])))
-        {
-            setCellState("None");
-            cell.state = "None";
-        }
-    }, [startCell, finishCell])
+    const isFinishCell = () =>
+    {
+        return (cell.row === finishCellCoord[0] && cell.col === finishCellCoord[1]);
+    }
 
     const isVisitedClass = () =>
     {
@@ -31,7 +29,32 @@ function Cell({ cell }) {
         return "NotVisited";
     }
 
-    
+    const [astartCell, setStartCell] = useState(isStartCell());
+    const [afinishCell, setFinishCell] = useState(isFinishCell());
+    const [cellState, setCellState] = useState(cell.state);
+    const [cellVisited, setCellVisited] = useState(cell.visited);
+
+    useEffect(() => {
+        if(cellState === "Start" && !isStartCell() || cellState === "Finish" && !isFinishCell())
+        {
+            setCellState("None");
+            cell.state = "None";
+        }
+    }, [startCellCoord, finishCellCoord])
+
+    const setState = () =>
+    {
+        if(isStartCell())
+        {
+            return "Start";
+        }
+        else if(isFinishCell())
+        {
+            return "Finish";
+        }
+        return cellState;
+    }
+
     const onMouseDown = (e) =>
     {
         if(headerState === "Wall" && e.buttons === 1)
@@ -101,9 +124,10 @@ function Cell({ cell }) {
         cell.state = cellState;
     }
 
+
     return (        
         <div 
-            className={"Cell " + "Cell__" + cellState + " Cell__" + isVisitedClass()} 
+            className={"Cell " + "Cell__" + setState() + " Cell__" + isVisitedClass()} 
             onMouseDown={onMouseDown} 
             onMouseEnter={onMouseEnter}
             onMouseUp={onMouseUp}

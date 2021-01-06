@@ -5,8 +5,8 @@ import './MainPage.css';
 import {useSelector} from 'react-redux';
 
 function MainPage() {   
-    const STARTING_CELL = useSelector(state => state.startCell); //start
-    const FINISHING_CELL = useSelector(state => state.finishCell); //finish
+    const startCell = useSelector(state => state.startCell); //start
+    const finishCell = useSelector(state => state.finishCell); //finish
 
     const [grid, setGrid] = useState([]);
 
@@ -24,14 +24,16 @@ function MainPage() {
                     visited: false, 
                     state: "None"
                 }
-                if(r === STARTING_CELL[0] && c === STARTING_CELL[1])
+
+                if(r === startCell[0] && c === startCell[1])
                 {
                     cell["state"] = "Start";
                 }
-                else if(r === FINISHING_CELL[0] && c === FINISHING_CELL[1])
+                else if(r === finishCell[0] && c === finishCell[1])
                 {
                     cell["state"] = "Finish";
                 }
+                
                 currRow.push(cell);
             }
             grid.push(currRow);
@@ -46,7 +48,11 @@ function MainPage() {
                 {grid.map((row, indexR) => {
                     return (
                         <div className="Grid__Row"> 
-                            {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]} />)} 
+                            {row.map((col, indexC) => 
+                                <Cell 
+                                    cell = {grid[indexR][indexC]} 
+                                />
+                            )} 
                         </div>
                     )
                 })}

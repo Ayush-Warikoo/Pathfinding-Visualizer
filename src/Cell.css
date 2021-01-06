@@ -17,12 +17,20 @@
     background-color: rgb(200, 200, 200);
 }
 
+.Cell__NotVisited {
+    background-color: rgb(200, 200, 200);
+}
+
 .Cell__Visited {
     background-color:  rgb(100, 100, 100);
 }
 
-.Cell__NotVisited {
-    background-color: rgb(200, 200, 200);
+.Cell__Weight {
+    background-color: rgb(44, 130, 241);
+}
+
+.Cell__Wall {
+    background-color: black;
 }
 
 .Cell__Start {
@@ -32,13 +40,4 @@
 .Cell__Finish {
     background-color: green;
 }
-
-.Cell__Wall {
-    background-color: black;
-}
-
-.Cell__Weight {
-    background-color: darkgray;
-}
-
 
