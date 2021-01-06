@@ -2,13 +2,10 @@ import React, {useState, useEffect } from 'react';
 import Header from './Header';
 import Cell  from './Cell';
 import './MainPage.css';
-import {useSelector} from 'react-redux';
 
 function MainPage() {   
-    const startCell = useSelector(state => state.startCell); //start
-    const finishCell = useSelector(state => state.finishCell); //finish
-
     const [grid, setGrid] = useState([]);
+    
 
     useEffect(() => {
         let grid = [];
@@ -17,23 +14,13 @@ function MainPage() {
             let currRow = [];
             for(let c = 0; c < 50; c++)
             {
-                //State can be None, Start, Finish or Wall
+                //State can be None, Wall or Weight
                 let cell = {
                     row: r,
                     col: c,
                     visited: false, 
                     state: "None"
                 }
-
-                if(r === startCell[0] && c === startCell[1])
-                {
-                    cell["state"] = "Start";
-                }
-                else if(r === finishCell[0] && c === finishCell[1])
-                {
-                    cell["state"] = "Finish";
-                }
-                
                 currRow.push(cell);
             }
             grid.push(currRow);

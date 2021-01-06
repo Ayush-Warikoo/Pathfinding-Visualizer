@@ -3,13 +3,13 @@ import './Cell.css';
 import {useSelector, useDispatch} from 'react-redux';
 import { setStart, setFinish } from './action/index';
 
-
 function Cell({ cell }) {
+    //Store Values
     let headerState = useSelector(state => state.headerState);
     let startCellCoord = useSelector(state => state.startCell);
     let finishCellCoord = useSelector(state => state.finishCell);
-    const dispatch = useDispatch();
 
+    //Helper functions
     const isStartCell = () =>
     {
         return (cell.row === startCellCoord[0] && cell.col === startCellCoord[1]);
@@ -29,41 +29,36 @@ function Cell({ cell }) {
         return "NotVisited";
     }
 
-    const [astartCell, setStartCell] = useState(isStartCell());
-    const [afinishCell, setFinishCell] = useState(isFinishCell());
+    //States
+    const [startCell, setStartCell] = useState(isStartCell());
+    const [finishCell, setFinishCell] = useState(isFinishCell());
     const [cellState, setCellState] = useState(cell.state);
     const [cellVisited, setCellVisited] = useState(cell.visited);
+    const dispatch = useDispatch();
 
+    //Event handling functions 
     useEffect(() => {
-        if(cellState === "Start" && !isStartCell() || cellState === "Finish" && !isFinishCell())
+        
+        if(startCell && !isStartCell())
         {
-            setCellState("None");
-            cell.state = "None";
+            setStartCell(false);
+        }
+        else if(finishCell && !isFinishCell())
+        {
+            setFinishCell(false);
         }
     }, [startCellCoord, finishCellCoord])
 
-    const setState = () =>
-    {
-        if(isStartCell())
-        {
-            return "Start";
-        }
-        else if(isFinishCell())
-        {
-            return "Finish";
-        }
-        return cellState;
-    }
-
     const onMouseDown = (e) =>
     {
+        
         if(headerState === "Wall" && e.buttons === 1)
         {
             if(cellState === "Wall")
             {
                 setCellState("None");
             }
-            else if(cellState !== "Start" && cellState !== "Finish")
+            else if(!startCell && !finishCell)
             {
                 setCellState("Wall");
             }
@@ -74,7 +69,7 @@ function Cell({ cell }) {
             {
                 setCellState("None");
             }
-            else if(cellState !== "Start" && cellState !== "Finish")
+            else if(!startCell && !finishCell)
             {
                 setCellState("Weight");
             }
@@ -84,13 +79,14 @@ function Cell({ cell }) {
 
     const onMouseEnter = (e) =>
     {
+        
         if(headerState === "Wall" && e.buttons === 1)
         {
             if(cellState === "Wall")
             {
                 setCellState("None");
             }
-            else if(cellState !== "Start" && cellState !== "Finish")
+            else if(!startCell && !finishCell)
             {
                 setCellState("Wall");
             }
@@ -101,7 +97,7 @@ function Cell({ cell }) {
             {
                 setCellState("None");
             }
-            else if(cellState !== "Start" && cellState !== "Finish")
+            else if(!startCell && !finishCell)
             {
                 setCellState("Weight");
             }
@@ -111,19 +107,32 @@ function Cell({ cell }) {
 
     const onMouseUp = (e) =>
     {
-        if(headerState === "Start" && cellState !== "Finish")
+        
+        if(headerState === "Start" && !finishCell)
         {
-            setCellState("Start");
+            setStartCell(true);
             dispatch(setStart([cell.row, cell.col]));
         }
-        else if(headerState === "Finish" && cellState !== "Start")
+        else if(headerState === "Finish" && !startCell)
         {
-            setCellState("Finish");
+            setFinishCell(true);
             dispatch(setFinish([cell.row, cell.col]));
-        }
-        cell.state = cellState;
+        }   
     }
 
+    //Regular functions
+    const setState = () =>
+    {
+        if(startCell)
+        {
+            return "Start";
+        }
+        else if(finishCell)
+        {
+            return "Finish";
+        }
+        return cellState;
+    }
 
     return (        
         <div 
