@@ -5,7 +5,6 @@ import './MainPage.css';
 
 function MainPage() {   
     const [grid, setGrid] = useState([]);
-    
 
     useEffect(() => {
         let grid = [];
@@ -18,8 +17,9 @@ function MainPage() {
                 let cell = {
                     row: r,
                     col: c,
+                    state: "None",
                     visited: false, 
-                    state: "None"
+                    path: false
                 }
                 currRow.push(cell);
             }
@@ -30,16 +30,12 @@ function MainPage() {
     
     return (
         <div className="MainPage" >
-            <Header/>
+            <Header grid = {grid} />
             <div className="Grid" >
                 {grid.map((row, indexR) => {
                     return (
                         <div className="Grid__Row"> 
-                            {row.map((col, indexC) => 
-                                <Cell 
-                                    cell = {grid[indexR][indexC]} 
-                                />
-                            )} 
+                            {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]} />)} 
                         </div>
                     )
                 })}

@@ -2,8 +2,11 @@ import React from 'react';
 import './Header.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {headerSelect} from './action/index';
+import {bfs} from './algorithms/bfs';
+import {dijkstra} from './algorithms/dijkstra';
 
-function Header() {
+
+function Header(grid) {
     const dispatch = useDispatch();
 
     return (
@@ -23,6 +26,10 @@ function Header() {
             </div>
             <div className="Header__Algorithm" > 
                 <h2> Algorithm </h2>
+                <button onClick={() => bfs(grid)}> Breadth-first search </button> 
+                <button onClick={() => dijkstra(grid)}> Dijkstra </button> 
+
+
             </div>
             <div className="Header__RunProgram"> 
                 <h2> Run Program </h2>

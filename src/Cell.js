@@ -20,19 +20,11 @@ function Cell({ cell }) {
         return (cell.row === finishCellCoord[0] && cell.col === finishCellCoord[1]);
     }
 
-    const isVisitedClass = () =>
-    {
-        if(cell.visited)
-        {
-            return "Visited";
-        }
-        return "NotVisited";
-    }
-
     //States
     const [startCell, setStartCell] = useState(isStartCell());
     const [finishCell, setFinishCell] = useState(isFinishCell());
     const [cellState, setCellState] = useState(cell.state);
+    const [cellPath, setCellPath] = useState(cell.path);
     const [cellVisited, setCellVisited] = useState(cell.visited);
     const dispatch = useDispatch();
 
@@ -51,16 +43,17 @@ function Cell({ cell }) {
 
     const onMouseDown = (e) =>
     {
-        
         if(headerState === "Wall" && e.buttons === 1)
         {
             if(cellState === "Wall")
             {
                 setCellState("None");
+                cell.state = "None";
             }
             else if(!startCell && !finishCell)
             {
                 setCellState("Wall");
+                cell.state = "Wall";
             }
         }
         else if(headerState === "Weight" && e.buttons === 1)
@@ -68,13 +61,14 @@ function Cell({ cell }) {
             if(cellState === "Weight")
             {
                 setCellState("None");
+                cell.state = "None";
             }
             else if(!startCell && !finishCell)
             {
                 setCellState("Weight");
+                cell.state = "Weight";
             }
         }
-        cell.state = cellState;
     }
 
     const onMouseEnter = (e) =>
@@ -85,10 +79,12 @@ function Cell({ cell }) {
             if(cellState === "Wall")
             {
                 setCellState("None");
+                cell.state = "None";
             }
             else if(!startCell && !finishCell)
             {
                 setCellState("Wall");
+                cell.state = "Wall";
             }
         }
         else if(headerState === "Weight" && e.buttons === 1)
@@ -96,18 +92,18 @@ function Cell({ cell }) {
             if(cellState === "Weight")
             {
                 setCellState("None");
+                cell.state = "None";
             }
             else if(!startCell && !finishCell)
             {
                 setCellState("Weight");
+                cell.state = "Weight";
             }
-        }
-        cell.state = cellState;
+        }       
     }
 
     const onMouseUp = (e) =>
     {
-        
         if(headerState === "Start" && !finishCell)
         {
             setStartCell(true);
@@ -121,7 +117,7 @@ function Cell({ cell }) {
     }
 
     //Regular functions
-    const setState = () =>
+    const setStateClass = () =>
     {
         if(startCell)
         {
@@ -134,9 +130,28 @@ function Cell({ cell }) {
         return cellState;
     }
 
+    const setVisitedClass = () =>
+    {
+        if(cell.visited)
+        {
+            return "Visited";
+        }
+        return "NotVisited";
+    }
+
+    const setPathClass = () =>
+    {
+        
+        if(cell.path)
+        {
+            return "Path";
+        }
+        return "NotPath";
+    }
+
     return (        
         <div 
-            className={"Cell " + "Cell__" + setState() + " Cell__" + isVisitedClass()} 
+            className={"Cell " + "Cell__" + setStateClass() + " Cell__" + setVisitedClass() + " Cell__" + setPathClass()} 
             onMouseDown={onMouseDown} 
             onMouseEnter={onMouseEnter}
             onMouseUp={onMouseUp}

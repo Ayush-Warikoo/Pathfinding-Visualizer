@@ -16,10 +16,11 @@
 .Cell__None {
     background-color: rgb(200, 200, 200);
 }
-
+/*
 .Cell__NotVisited {
     background-color: rgb(200, 200, 200);
 }
+*/
 
 .Cell__Visited {
     background-color:  rgb(100, 100, 100);
@@ -27,6 +28,10 @@
 
 .Cell__Weight {
     background-color: rgb(44, 130, 241);
+}
+
+.Cell__Path {
+    background-color: gold;
 }
 
 .Cell__Wall {
