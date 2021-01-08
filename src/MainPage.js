@@ -2,16 +2,17 @@ import React, {useState, useEffect } from 'react';
 import Header from './Header';
 import Cell  from './Cell';
 import './MainPage.css';
+import {NUM_COL, NUM_ROW} from './constants';
 
 function MainPage() {   
     const [grid, setGrid] = useState([]);
 
     useEffect(() => {
         let grid = [];
-        for(let r = 0; r < 20; r++)
+        for(let r = 0; r < NUM_ROW; r++)
         {
             let currRow = [];
-            for(let c = 0; c < 50; c++)
+            for(let c = 0; c < NUM_COL; c++)
             {
                 //State can be None, Wall or Weight
                 let cell = {
