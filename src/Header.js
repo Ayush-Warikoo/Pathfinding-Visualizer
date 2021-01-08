@@ -1,13 +1,66 @@
-import React from 'react';
+import React, {useState } from 'react';
 import './Header.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {headerSelect} from './action/index';
-import {bfs} from './algorithms/bfs';
+import {bfsAlgo} from './algorithms/bfs';
 import {dijkstra} from './algorithms/dijkstra';
 
 
 function Header(grid) {
     const dispatch = useDispatch();
+    const [updateCell, setUpdateCell] = useState(false);
+
+    let startCellCoord = useSelector(state => state.startCell);
+    let finishCellCoord = useSelector(state => state.finishCell);
+
+    const bfs = (grid) =>
+    {
+        //console.log(bfsAlgo(grid));
+        
+        let [orderedVisitedCells, pathCells] = bfsAlgo(grid);
+        console.log(pathCells);
+        //return;
+        /*
+        for(const cell of orderedVisitedCells)
+        {
+            cell.visited = false;
+        }
+        */
+        console.log(orderedVisitedCells);
+        console.log(pathCells);
+        
+        //dispatch(headerSelect("{i}"));
+        for (let i = 0; i <= orderedVisitedCells.length; i++) {
+            if (i === orderedVisitedCells.length) {
+              setTimeout(() => {
+                if(pathCells === false)
+                {
+                    alert("Impossible to path from start to finish!");
+                    return; 
+                }
+                for (let j = 0; j < pathCells.length; j++) {
+                    setTimeout(() => {
+                      const cell = pathCells[j];
+                      cell.path = true;
+                      console.log(cell);
+                      dispatch(headerSelect(j));
+                    }, 100 * j);
+                }
+              }, 20 * i);
+              return;
+            }
+            setTimeout(() => {
+              const cell = orderedVisitedCells[i];
+              cell.visited = true;
+              console.log(cell);
+              dispatch(headerSelect(i));
+            }, 20 * i);
+        }
+
+        console.log(orderedVisitedCells);
+        console.log(pathCells);
+        return;
+    }
 
     return (
         <div className="Header">
