@@ -8,6 +8,7 @@ function Cell({ cell }) {
     let headerState = useSelector(state => state.headerState);
     let startCellCoord = useSelector(state => state.startCell);
     let finishCellCoord = useSelector(state => state.finishCell);
+    let forceUpdate = useSelector(state => state.forceUpdate);
 
     //Helper functions
     const isStartCell = () =>

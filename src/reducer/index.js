@@ -2,12 +2,14 @@
 import headerState from './headerState';
 import startCell from './startCell';
 import finishCell from './finishCell';
+import forceUpdate from './forceUpdate';
 import {combineReducers } from 'redux';
 
 const allReducers = combineReducers({
     headerState,
     startCell,
-    finishCell
+    finishCell,
+    forceUpdate
 })
 
 export default allReducers;

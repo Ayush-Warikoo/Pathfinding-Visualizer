@@ -33,7 +33,8 @@ function MainPage() {
         <div className="MainPage" >
             <Header grid = {grid} />
             <div className="Grid" >
-                {grid.map((row, indexR) => {
+                {
+                    grid.map((row, indexR) => {
                     return (
                         <div className="Grid__Row"> 
                             {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]} />)} 

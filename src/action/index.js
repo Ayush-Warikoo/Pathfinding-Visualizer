@@ -7,7 +7,6 @@ export const headerSelect = (newState) =>
     };
 };
 
-
 export const setStart = (newState) =>
 {
     return {
@@ -20,6 +19,14 @@ export const setFinish = (newState) =>
 {
     return {
         type: 'SET_FINISH',
+        payload: newState
+    }
+}
+
+export const forceUpdate = (newState) =>
+{
+    return {
+        type: 'FORCE_UPDATE',
         payload: newState
     }
 }
