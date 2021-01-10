@@ -14,7 +14,7 @@ const clearBoard = (grid, clear) =>
 }
 */
 
-function Header({ grid }) {
+function Header({ grid, clear }) {
     const dispatch = useDispatch();
     return (
         <div className="Header">
@@ -42,7 +42,7 @@ function Header({ grid }) {
             </div>
             <div className="Header__ClearBoard"> 
                 <h2> Clear Board </h2>
-                <button> Clear Board </button>
+                <button onClick={clear} > Clear Board </button>
             </div>            
         </div>
     )

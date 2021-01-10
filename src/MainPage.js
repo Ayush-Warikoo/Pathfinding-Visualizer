@@ -6,6 +6,7 @@ import {NUM_COL, NUM_ROW} from './constants';
 
 function MainPage() {   
     const [grid, setGrid] = useState([]);
+    const [clearBoard, setClearBoard] = useState(0);
 
     useEffect(() => {
         let grid = [];
@@ -27,17 +28,22 @@ function MainPage() {
             grid.push(currRow);
         }
         setGrid(grid);
-    }, [])
+    }, [clearBoard])
+
+    const clear = () =>
+    {
+        setClearBoard(clearBoard + 1)
+    }
     
     return (
         <div className="MainPage" >
-            <Header grid = {grid} />
+            <Header grid={grid} clear={clear} />
             <div className="Grid" >
                 {
                     grid.map((row, indexR) => {
                     return (
                         <div className="Grid__Row"> 
-                            {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]} />)} 
+                            {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]}/>)} 
                         </div>
                     )
                 })}

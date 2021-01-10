@@ -44,6 +44,7 @@ function Cell({ cell }) {
 
     const onMouseDown = (e) =>
     {
+        setCellState(cell.state); 
         if(headerState === "Wall" && e.buttons === 1)
         {
             if(cellState === "Wall")
@@ -74,7 +75,7 @@ function Cell({ cell }) {
 
     const onMouseEnter = (e) =>
     {
-        
+        setCellState(cell.state);        
         if(headerState === "Wall" && e.buttons === 1)
         {
             if(cellState === "Wall")
@@ -128,7 +129,7 @@ function Cell({ cell }) {
         {
             return "Finish";
         }
-        return cellState;
+        return cell.state;
     }
 
     const setVisitedClass = () =>
@@ -151,7 +152,7 @@ function Cell({ cell }) {
     }
 
     return (        
-        <div 
+        <div //key={"Cell:" + cell.row + ", " + cell.col}
             className={"Cell " + "Cell__" + setStateClass() + " Cell__" + setVisitedClass() + " Cell__" + setPathClass()} 
             onMouseDown={onMouseDown} 
             onMouseEnter={onMouseEnter}
