@@ -17,17 +17,17 @@ export const bfs = async (grid) =>
 //Calculates orderedVisitedCells and pathCells, returns false for pathCells if no path exists 
 const bfsAlgo = (grid) => 
 {
-    const startCellCoord = store.getState().startCell; 
-    const finishCellCoord = store.getState().finishCell; 
+    const startCoord = store.getState().startCell; 
+    const finishCoord = store.getState().finishCell; 
 
     let cellQueue = [];
     let pathQueue = [];
-    let orderedVisitedNodes = [];
+    let orderedVisitedCells = [];
     let visitedArray = setVisitedArray();
 
-    visitedArray[startCellCoord[0]][startCellCoord[1]] = true;
-    cellQueue.push(grid[startCellCoord[0]][startCellCoord[1]]);
-    pathQueue.push([startCellCoord]);   
+    visitedArray[startCoord[0]][startCoord[1]] = true;
+    cellQueue.push(grid[startCoord[0]][startCoord[1]]);
+    pathQueue.push([startCoord]);   
 
     let cond = false;
     let returnPath = false;
@@ -35,39 +35,39 @@ const bfsAlgo = (grid) =>
     while(cellQueue.length > 0)
     {        
         let cell = cellQueue.shift();
-        orderedVisitedNodes.push(cell);
+        orderedVisitedCells.push(cell);
         let path = pathQueue.shift();
 
         //Up 
         if(cell.row > 0 && !cond)
         {
-            [cond, returnPath] = directionCheck(cell.row - 1, cell.col, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCellCoord);
+            [cond, returnPath] = directionCheck(cell.row - 1, cell.col, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCoord);
         }
         //Right
         if(cell.col < NUM_COL - 1 && !cond)
         {
-            [cond, returnPath] = directionCheck(cell.row, cell.col + 1, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCellCoord);
+            [cond, returnPath] = directionCheck(cell.row, cell.col + 1, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCoord);
         }
         //Down
         if(cell.row < NUM_ROW - 1 && !cond)
         {
-            [cond, returnPath] = directionCheck(cell.row + 1, cell.col, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCellCoord);
+            [cond, returnPath] = directionCheck(cell.row + 1, cell.col, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCoord);
         }
         //Left
         if(cell.col > 0 && !cond)
         {
-            [cond, returnPath] = directionCheck(cell.row, cell.col - 1, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCellCoord);
+            [cond, returnPath] = directionCheck(cell.row, cell.col - 1, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCoord);
         }
         //
         if(cond)
         {
-            return [orderedVisitedNodes, returnPath];
+            return [orderedVisitedCells, returnPath];
         }
     }
-    return [orderedVisitedNodes, false];
+    return [orderedVisitedCells, false];
 }
 
-//bfsAlgo helper functions 
+//Set up visitedArray for bfsAlgo
 const setVisitedArray = () =>
 {
     let arr = [];
