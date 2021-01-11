@@ -24,9 +24,7 @@ function Cell({ cell }) {
     //States
     const [startCell, setStartCell] = useState(isStartCell());
     const [finishCell, setFinishCell] = useState(isFinishCell());
-    const [cellState, setCellState] = useState(cell.state);
-    const [cellPath, setCellPath] = useState(cell.path);
-    const [cellVisited, setCellVisited] = useState(cell.visited);
+    const [updateCellState, setUpdateCellState] = useState(0);
     const dispatch = useDispatch();
 
     //Event handling functions 
@@ -44,62 +42,63 @@ function Cell({ cell }) {
 
     const onMouseDown = (e) =>
     {
-        setCellState(cell.state); 
         if(headerState === "Wall" && e.buttons === 1)
         {
-            if(cellState === "Wall")
+            if(cell.state === "Wall")
             {
-                setCellState("None");
                 cell.state = "None";
+                setUpdateCellState(updateCellState + 1);
+                
             }
             else if(!startCell && !finishCell)
             {
-                setCellState("Wall");
                 cell.state = "Wall";
+                setUpdateCellState(updateCellState + 1);
             }
         }
         else if(headerState === "Weight" && e.buttons === 1)
         {
-            if(cellState === "Weight")
+            if(cell.state === "Weight")
             {
-                setCellState("None");
                 cell.state = "None";
+                setUpdateCellState(updateCellState + 1);   
             }
             else if(!startCell && !finishCell)
             {
-                setCellState("Weight");
                 cell.state = "Weight";
+                setUpdateCellState(updateCellState + 1);
             }
         }
     }
 
     const onMouseEnter = (e) =>
-    {
-        setCellState(cell.state);        
+    {       
         if(headerState === "Wall" && e.buttons === 1)
         {
-            if(cellState === "Wall")
+            if(cell.state === "Wall")
             {
-                setCellState("None");
                 cell.state = "None";
+                setUpdateCellState(updateCellState + 1);
+                
             }
             else if(!startCell && !finishCell)
             {
-                setCellState("Wall");
                 cell.state = "Wall";
+                setUpdateCellState(updateCellState + 1);
+                
             }
         }
         else if(headerState === "Weight" && e.buttons === 1)
         {
-            if(cellState === "Weight")
+            if(cell.state === "Weight")
             {
-                setCellState("None");
                 cell.state = "None";
+                setUpdateCellState(updateCellState + 1);
             }
             else if(!startCell && !finishCell)
             {
-                setCellState("Weight");
                 cell.state = "Weight";
+                setUpdateCellState(updateCellState + 1);
             }
         }       
     }
@@ -152,7 +151,7 @@ function Cell({ cell }) {
     }
 
     return (        
-        <div //key={"Cell:" + cell.row + ", " + cell.col}
+        <div 
             className={"Cell " + "Cell__" + setStateClass() + " Cell__" + setVisitedClass() + " Cell__" + setPathClass()} 
             onMouseDown={onMouseDown} 
             onMouseEnter={onMouseEnter}

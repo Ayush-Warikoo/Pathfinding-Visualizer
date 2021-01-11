@@ -5,15 +5,6 @@ import {headerSelect} from './action/index';
 import {bfs} from './algorithms/bfs';
 import {dijkstra} from './algorithms/dijkstra';
 
-/*
-const clearBoard = (grid, clear) =>
-{
-    grid = grid.grid;
-    console.log(grid);
-    clear = true;
-}
-*/
-
 function Header({ grid, clear }) {
     const dispatch = useDispatch();
     return (
