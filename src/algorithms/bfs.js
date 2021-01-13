@@ -58,7 +58,7 @@ const bfsAlgo = (grid) =>
         {
             [cond, returnPath] = directionCheck(cell.row, cell.col - 1, path.slice(), visitedArray, grid, cellQueue, pathQueue, finishCoord);
         }
-        //
+        //Condition of finish node found 
         if(cond)
         {
             return [orderedVisitedCells, returnPath];
@@ -81,7 +81,8 @@ const setVisitedArray = () =>
 //First return value determines if the finish node is reached, second is newPath needed 
 const directionCheck = (row, col, newPath, visitedArray, grid, cellQueue, pathQueue, finishCellCoord) =>
 {
-    if(!visitedArray[row][col] && grid[row][col].state !== "Wall")
+    if(!visitedArray[row][col] && 
+        (grid[row][col].state !== "Wall" || (row === finishCellCoord[0] && col === finishCellCoord[1])))
     {
         let newCell = grid[row][col];
         visitedArray[row][col] = true;

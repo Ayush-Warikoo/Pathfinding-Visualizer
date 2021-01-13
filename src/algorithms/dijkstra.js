@@ -23,7 +23,7 @@ const dijkstraAlgo = (grid) =>
 
     let orderedVisitedCells = [];
     let orderedPathCells = [];
-    let dijkstraTable = setDijkstraTable(grid, startCoord);
+    let dijkstraTable = setDijkstraTable(grid, startCoord, finishCoord);
 
     let numUnvisited = NUM_ROW * NUM_COL;
     let currCell = null;
@@ -104,7 +104,7 @@ const dijkstraAlgo = (grid) =>
 }
 
 //Initialize the dijkstra table for dijkstraAlgo
-const setDijkstraTable = (grid, startCoord) => 
+const setDijkstraTable = (grid, startCoord, finishCoord) => 
 {
     let table = [];
     for(let r = 0; r < NUM_ROW; r++)
@@ -127,6 +127,11 @@ const setDijkstraTable = (grid, startCoord) =>
             if(r === startCoord[0] && c === startCoord[1])
             {
                 startDistanceValue = 0;
+                wallValue = false;
+            }
+            if(r === finishCoord[0] && c === finishCoord[1])
+            {
+                wallValue = false;
             }
 
             let cell = {
