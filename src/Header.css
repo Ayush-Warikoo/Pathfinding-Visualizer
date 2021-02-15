@@ -1,7 +1,19 @@
 .Header {
+    min-width: 1350px;
+    color: "white";
+}
+
+.Header__Title {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(51, 51, 51);
+}
+
+.Header__Subtitle {
     display: flex;
     justify-content: space-around;
     margin-left: auto;
     margin-right: auto;
-    min-width: 1350px;
+    background-color: rgb(120, 120, 120);
+    color: "white";
 }

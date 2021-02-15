@@ -1,18 +1,5 @@
-//import {useSelector, useDispatch} from 'react-redux';
-//import React, {useState, useEffect} from 'react';
-import {headerSelect} from '../action/index';
-import {forceUpdate} from '../action/index';
 import store from '../index';
 import {NUM_ROW, NUM_COL} from '../constants';
-
-export const bfs = async (grid) =>
-{
-    store.dispatch(headerSelect("None"));
-    let [orderedVisitedCells, pathCells] = bfsAlgo(grid);
-    await animateVisitedCells(orderedVisitedCells);
-    await animatePathCells(pathCells);
-    resetGrid(grid);
-}
 
 //Calculates orderedVisitedCells and pathCells, returns false for pathCells if no path exists 
 const bfsAlgo = (grid) => 
@@ -99,55 +86,5 @@ const directionCheck = (row, col, newPath, visitedArray, grid, cellQueue, pathQu
     return [false, newPath];
 }
 
-const animateVisitedCells = (orderedVisitedCells) =>
-{
-    return new Promise((resolve, reject) => {
-        for (let i = 0; i < orderedVisitedCells.length; i++) {
-            setTimeout(() => {
-                const cell = orderedVisitedCells[i];
-                cell.visited = true;
-                store.dispatch(forceUpdate(i));
-                if(i === orderedVisitedCells.length - 1)
-                {
-                    resolve();
-                }
-            }, 20 * i);
-        }
-    })
-}
-
-const animatePathCells = (pathCells) =>
-{
-    if(pathCells === false)
-    {
-        alert("Impossible to path from start to finish!");
-        return;
-    }
-    return new Promise((resolve, reject) => {
-        for (let i = 0; i < pathCells.length; i++) {
-            setTimeout(() => {
-                const cell = pathCells[i];
-                cell.path = true;
-                store.dispatch(forceUpdate(i));
-                if(i === pathCells.length - 1)
-                {
-                    resolve();
-                }
-            }, 100 * i);
-        }    
-    })
-}
-
-const resetGrid = (grid) =>
-{
-    for(let r = 0; r < grid.length; r++)
-    {
-        for(let c = 0; c < grid[r].length; c++)
-        {
-            grid[r][c].visited = false;
-            grid[r][c].path = false;
-        }
-    }
-    return;
-}
+export default bfsAlgo;
 
