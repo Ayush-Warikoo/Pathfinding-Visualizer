@@ -1,11 +1,13 @@
 .Cell {
     align-self: center;
     border: 1px solid black;
-    height: 25px;
-    width: 25px;
+    height: 1.8vw;
+    width: 1.8vw;
     background-color: rgb(200, 200, 200);
     display: inline-block;
     margin-bottom: -4px;
+    min-width: 25px;
+    min-height: 25px;
 }
 
 /*
