@@ -1,5 +1,7 @@
 
-const finishCell = (state = [19,49], action) => {
+import {INIT_FINISH_CORD} from '../constants';
+
+const finishCell = (state = INIT_FINISH_CORD, action) => {
     switch(action.type)
     {
         case "SET_FINISH":

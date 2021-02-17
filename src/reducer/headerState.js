@@ -1,4 +1,6 @@
-const headerState = (state = "Start", action) => {
+import {START_STATE} from '../constants';
+
+const headerState = (state = START_STATE, action) => {
     switch(action.type)
     {
         case "HEADER_SELECT":
