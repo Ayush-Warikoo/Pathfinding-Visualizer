@@ -3,13 +3,13 @@
     color: "white";
 }
 
-.Header__Title {
+.Header__Top {
     display: flex;
     justify-content: center;
     background-color: rgb(51, 51, 51);
 }
 
-.Header__Subtitle {
+.Header__Bottom {
     display: flex;
     justify-content: space-around;
     margin-left: auto;

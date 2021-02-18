@@ -3,10 +3,11 @@ import {forceUpdate} from '../action/index';
 import store from '../index';
 import bfsAlgo from './bfs';
 import dijkstraAlgo from './dijkstra';
+import { NO_STATE, ANIMATE_VISIT_SPEED, ANIMATE_PATH_SPEED } from '../constants';
 
 const algorithmManager = async (grid, algo) =>
 {
-    store.dispatch(headerSelect("None"));
+    store.dispatch(headerSelect(NO_STATE));
     let orderedVisitedCells;
     let pathCells;
     if(algo === "Bfs")
@@ -38,7 +39,7 @@ const animateVisitedCells = (orderedVisitedCells) =>
                 {
                     resolve();
                 }
-            }, 20 * i);
+            }, ANIMATE_VISIT_SPEED * i);
         }
     })
 }
@@ -60,7 +61,7 @@ const animatePathCells = (pathCells) =>
                 {
                     resolve();
                 }
-            }, 100 * i);
+            }, ANIMATE_PATH_SPEED * i);
         }    
     })
 }

@@ -16,6 +16,7 @@ export const BORDER_WALL_STATE = "BorderWall";
 export const WEIGHT_ONE_STATE = "WeightOne";
 export const WEIGHT_TWO_STATE = "WeightTwo";
 
+//Header Titles
 export const PATH_CELLS_TITLE = "Path Cells";
 export const WALLS_TITLE = "Walls";
 export const WEIGHTS_TITLE = "Weights";

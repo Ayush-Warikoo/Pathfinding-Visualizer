@@ -3,6 +3,7 @@ import './Header.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {headerSelect} from './action/index';
 import algorithmManager from './algorithms/algorithms';
+import { CELL_WALL_STATE, FINISH_STATE, START_STATE, WEIGHT_ONE_STATE } from './constants';
 
 function Header({ grid, clear }) {
     const [algorithm, setAlgorithm] = useState(null);
@@ -10,18 +11,41 @@ function Header({ grid, clear }) {
     const dispatch = useDispatch();
     return (
         <div className="Header">
-            <div className="Header__Title">
-                <h1 style={{color: "rgb(35,109,187)"}}> Pathfinding Visualizer </h1> 
-            </div> 
-            <div className="Header__Subtitle">
+            <div className="Header__Top">
+                <div className="Header__ClearBoard"> 
+                    <button onClick={clear} > Clear Board </button>
+                </div>
+                <div className="Header__GenerateBoard"> 
+                    <button onClick={clear} > Clear Board </button>
+                </div>
+                <div className="Header__Title">
+                    <h1 style={{color: "rgb(35,109,187)"}}> Pathfinding Visualizer </h1> 
+                </div> 
+                <div className="Header__Algorithms">
+                    <select type="diet" onChange={e => setAlgorithm(e.target.value)}> 
+                        <option class="default" selected disabled hidden> Pick an Algorithm! </option>
+                        <option class="Bfs"> Bfs </option>, 
+                        <option class="Dijkstra"> Dijkstra </option>
+                    </select>
+                </div> 
+                <div className="Header__RunProgram">
+                    <button disabled={!algorithm} onClick={() => algorithmManager(grid, algorithm)} > 
+                        {!algorithm 
+                        ? `Pick an Algorithm!`
+                        : `Run ${algorithm}`} 
+                    </button>
+                </div>
+            </div>
+
+            <div className="Header__Bottom">
                 <div className="Header__PathCells"> 
                     <div className="PathCells__Title"> 
                         <h2 style={{color: "white"}}> Path Cells </h2>
                     </div> 
-                    <div className="Start__Cell" onClick={() => dispatch(headerSelect("Start"))}> 
+                    <div className="Start__Cell" onClick={() => dispatch(headerSelect(START_STATE))}> 
                         <h3> Start Cell </h3>
                     </div>
-                    <div className="Finish__Cell" onClick={() => dispatch(headerSelect("Finish"))}> 
+                    <div className="Finish__Cell" onClick={() => dispatch(headerSelect(FINISH_STATE))}> 
                         <h3> Finish Cell </h3>
                     </div>
                 </div>
@@ -46,35 +70,7 @@ function Header({ grid, clear }) {
                     <div className="Weight__Two"> 
                         <h3> Weight Two </h3>
                     </div>
-                </div>
-                <div className="Header__Algorithms" > 
-                    <div className="Algorithms__Title"> 
-                        <h2 style={{color: "white"}}> Algorithms </h2>
-                    </div>
-                    <div className="Algorithm__Dropdown">
-                        <select type="diet" onChange={e => setAlgorithm(e.target.value)}> 
-                            <option class="default" selected disabled hidden> Pick an Algorithm! </option>
-                            <option class="Bfs"> Bfs </option>, 
-                            <option class="Dijkstra"> Dijkstra </option>
-                        </select>
-                  </div> 
-
-                </div>
-                <div className="Header__RunProgram"> 
-                    <div className="Controls__Title"> 
-                        <h2 style={{color: "white"}}> Controls </h2>
-                    </div>
-                    <div> 
-                        <button onClick={clear} > Clear Board </button>
-                    </div>
-                    <div>
-                        <button disabled={!algorithm} onClick={() => algorithmManager(grid, algorithm)} > 
-                            {!algorithm 
-                            ? `Pick an Algorithm!`
-                            : `Run ${algorithm}`} 
-                        </button>
-                    </div>
-                </div>         
+                </div>     
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import Header from './Header';
 import Cell  from './Cell';
 import './MainPage.css';
-import {NUM_COL, NUM_ROW} from './constants';
+import {NUM_COL, NUM_ROW, NO_STATE} from './constants';
 
 function MainPage() {   
     const [grid, setGrid] = useState([]);
@@ -19,7 +19,7 @@ function MainPage() {
                 let cell = {
                     row: r,
                     col: c,
-                    state: "None",
+                    state: NO_STATE,
                     visited: false, 
                     path: false
                 }
