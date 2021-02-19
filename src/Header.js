@@ -3,12 +3,32 @@ import './Header.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {headerSelect} from './action/index';
 import algorithmManager from './algorithms/algorithms';
-import { CELL_WALL_STATE, FINISH_STATE, START_STATE, WEIGHT_ONE_STATE } from './constants';
+import { CELL_WALL_STATE, FINISH_STATE, START_STATE, WEIGHT_ONE_STATE, WEIGHT_TWO_STATE, BORDER_WALL_STATE, WALLS_TITLE, WEIGHTS_TITLE, PATH_CELLS_TITLE} from './constants';
 
 function Header({ grid, clear }) {
     const [algorithm, setAlgorithm] = useState(null);
 
     const dispatch = useDispatch();
+    let headerState = useSelector(state => state.headerState);
+
+    const setSelectedTitleClass = (title) => {
+        if(((headerState === START_STATE || headerState === FINISH_STATE) && title === PATH_CELLS_TITLE)
+        || ((headerState === "Wall"/*CELL_WALL_STATE*/ || headerState === BORDER_WALL_STATE) && title === WALLS_TITLE)
+        || ((headerState === "Weight" /*WEIGHT_ONE_STATE*/ || headerState === WEIGHT_TWO_STATE) && title === WEIGHTS_TITLE))
+        {
+            return " Header__SelectedTitle";
+        }
+        return " Header__NotSelectedTitle";
+    }
+ 
+    const setSelectedStateClass = (cell) => {
+        if(cell === headerState)
+        {
+            return " Header__SelectedState";
+        }
+        return " Header__NotSelectedState"
+    }
+
     return (
         <div className="Header">
             <div className="Header__Top">
@@ -16,7 +36,7 @@ function Header({ grid, clear }) {
                     <button onClick={clear} > Clear Board </button>
                 </div>
                 <div className="Header__GenerateBoard"> 
-                    <button onClick={clear} > Clear Board </button>
+                    <button /*onClick={clear}*/ >Generate Random Board </button>
                 </div>
                 <div className="Header__Title">
                     <h1 style={{color: "rgb(35,109,187)"}}> Pathfinding Visualizer </h1> 
@@ -38,36 +58,42 @@ function Header({ grid, clear }) {
             </div>
 
             <div className="Header__Bottom">
-                <div className="Header__PathCells"> 
-                    <div className="PathCells__Title"> 
-                        <h2 style={{color: "white"}}> Path Cells </h2>
+                <div className={"Header__PathCells" + setSelectedTitleClass(PATH_CELLS_TITLE)}> 
+                    <div className="Header__PathCellsTitle"> 
+                        <h2> Path Cells </h2>
                     </div> 
-                    <div className="Start__Cell" onClick={() => dispatch(headerSelect(START_STATE))}> 
+                    <div 
+                        className={"Header__StartCell" + setSelectedStateClass(START_STATE)} 
+                        onClick={() => dispatch(headerSelect(START_STATE))}> 
                         <h3> Start Cell </h3>
                     </div>
-                    <div className="Finish__Cell" onClick={() => dispatch(headerSelect(FINISH_STATE))}> 
+                    <div 
+                        className={"Header__FinishCell" + setSelectedStateClass(FINISH_STATE)} 
+                        onClick={() => dispatch(headerSelect(FINISH_STATE))}> 
                         <h3> Finish Cell </h3>
                     </div>
                 </div>
-                <div className="Header__Walls"> 
-                    <div className="Walls__Title"> 
-                        <h2 style={{color: "white"}}> Walls </h2>
+                <div className={"Header__Walls" + setSelectedTitleClass(WALLS_TITLE)}> 
+                    <div className="Header__WallsTitle"> 
+                        <h2> Walls </h2>
                     </div>
-                    <div className="Block__Wall" onClick={() => dispatch(headerSelect("Wall"))}> 
+                    <div 
+                        className={"Header__CellWall" + setSelectedStateClass("Wall"/*CELL_WALL_STATE*/)} 
+                        onClick={() => dispatch(headerSelect("Wall"))}> 
                         <h3> Block Wall </h3>
                     </div>
-                    <div className="Border__Wall">
+                    <div className={"Header__BorderWall" + setSelectedStateClass(BORDER_WALL_STATE)}>
                         <h3> Border Wall </h3> 
                     </div>
                 </div>
-                <div className="Header__Weights"> 
-                    <div className="Weights__Title"> 
-                        <h2 style={{color: "white"}}> Weights </h2>
+                <div className={"Header__Weights" + setSelectedTitleClass(WEIGHTS_TITLE)}> 
+                    <div className="Header__WeightsTitle"> 
+                        <h2> Weights </h2>
                     </div>
-                    <div className="Weight__One" onClick={() => dispatch(headerSelect("Weight"))}> 
+                    <div className={"Header__WeightOne" + setSelectedStateClass("Weight"/*WEIGHT_ONE_STATE*/)} onClick={() => dispatch(headerSelect("Weight"))}> 
                         <h3> Weight One </h3>
                     </div>
-                    <div className="Weight__Two"> 
+                    <div className={"Header__WeightTwo" + setSelectedStateClass(WEIGHT_TWO_STATE)}> 
                         <h3> Weight Two </h3>
                     </div>
                 </div>     

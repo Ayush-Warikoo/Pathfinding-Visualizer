@@ -11,9 +11,64 @@
 
 .Header__Bottom {
     display: flex;
-    justify-content: space-around;
-    margin-left: auto;
-    margin-right: auto;
     background-color: rgb(120, 120, 120);
     color: "white";
 }
+.Header__Bottom > div {
+    border: 1px solid black;
+    width: calc(100% / 3);
+    height: 125px;
+}
+
+.Header__PathCells > div {
+    height: 35px;
+}
+.Header__StartCell {
+    width: 50%;
+    float: left;
+}
+.Header__FinishCell {
+    width: 50%;
+    float: right;
+}
+ 
+.Header__Walls > div {
+    height: 35px;
+}
+.Header__CellWall {
+    width: 50%;
+    float: left;
+}
+.Header__BorderWall {
+    width: 50%;
+    float: right;
+}
+ 
+.Header__Weights > div {
+    height: 35px;
+}
+.Header__WeightOne {
+    width: 50%;
+    float: left;
+}
+.Header__WeightTwo {
+    width: 50%;
+    float: right;
+}
+
+.Header__SelectedTitle {
+    color: rgb(35,109,187);
+    background-color: rgb(171,202,250);
+}
+.Header__NotSelectedTitle {
+    color: white;
+}
+.Header__SelectedState {
+    color: purple;
+}
+.Header__NotSelectedState {
+    color: black;
+}
+
+
+
