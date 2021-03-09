@@ -13,8 +13,8 @@ function Header({ grid, clear }) {
 
     const setSelectedTitleClass = (title) => {
         if(((headerState === START_STATE || headerState === FINISH_STATE) && title === PATH_CELLS_TITLE)
-        || ((headerState === "Wall"/*CELL_WALL_STATE*/ || headerState === BORDER_WALL_STATE) && title === WALLS_TITLE)
-        || ((headerState === "Weight" /*WEIGHT_ONE_STATE*/ || headerState === WEIGHT_TWO_STATE) && title === WEIGHTS_TITLE))
+        || ((headerState === CELL_WALL_STATE || headerState === BORDER_WALL_STATE) && title === WALLS_TITLE)
+        || ((headerState === WEIGHT_ONE_STATE || headerState === WEIGHT_TWO_STATE) && title === WEIGHTS_TITLE))
         {
             return " Header__SelectedTitle";
         }
@@ -78,8 +78,8 @@ function Header({ grid, clear }) {
                         <h2> Walls </h2>
                     </div>
                     <div 
-                        className={"Header__CellWall" + setSelectedStateClass("Wall"/*CELL_WALL_STATE*/)} 
-                        onClick={() => dispatch(headerSelect("Wall"))}> 
+                        className={"Header__CellWall" + setSelectedStateClass(CELL_WALL_STATE)} 
+                        onClick={() => dispatch(headerSelect(CELL_WALL_STATE))}> 
                         <h3> Block Wall </h3>
                     </div>
                     <div className={"Header__BorderWall" + setSelectedStateClass(BORDER_WALL_STATE)}>
@@ -90,7 +90,7 @@ function Header({ grid, clear }) {
                     <div className="Header__WeightsTitle"> 
                         <h2> Weights </h2>
                     </div>
-                    <div className={"Header__WeightOne" + setSelectedStateClass("Weight"/*WEIGHT_ONE_STATE*/)} onClick={() => dispatch(headerSelect("Weight"))}> 
+                    <div className={"Header__WeightOne" + setSelectedStateClass(WEIGHT_ONE_STATE)} onClick={() => dispatch(headerSelect(WEIGHT_ONE_STATE))}> 
                         <h3> Weight One </h3>
                     </div>
                     <div className={"Header__WeightTwo" + setSelectedStateClass(WEIGHT_TWO_STATE)}> 

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './Cell.css';
 import {useSelector, useDispatch} from 'react-redux';
 import { setStart, setFinish } from './action/index';
+import {CELL_WALL_STATE, WEIGHT_ONE_STATE, NO_STATE} from './constants';
 
 function Cell({ cell }) {
     //Store Values
@@ -42,30 +43,30 @@ function Cell({ cell }) {
 
     const onMouseDown = (e) =>
     {
-        if(headerState === "Wall" && e.buttons === 1)
+        if(headerState === CELL_WALL_STATE && e.buttons === 1)
         {
-            if(cell.state === "Wall")
+            if(cell.state === CELL_WALL_STATE)
             {
-                cell.state = "None";
+                cell.state = NO_STATE;
                 setUpdateCellState(updateCellState + 1);
                 
             }
             else if(!startCell && !finishCell)
             {
-                cell.state = "Wall";
+                cell.state = CELL_WALL_STATE;
                 setUpdateCellState(updateCellState + 1);
             }
         }
-        else if(headerState === "Weight" && e.buttons === 1)
+        else if(headerState === WEIGHT_ONE_STATE && e.buttons === 1)
         {
-            if(cell.state === "Weight")
+            if(cell.state === WEIGHT_ONE_STATE)
             {
-                cell.state = "None";
+                cell.state = NO_STATE;
                 setUpdateCellState(updateCellState + 1);   
             }
             else if(!startCell && !finishCell)
             {
-                cell.state = "Weight";
+                cell.state = WEIGHT_ONE_STATE;
                 setUpdateCellState(updateCellState + 1);
             }
         }
@@ -73,31 +74,31 @@ function Cell({ cell }) {
 
     const onMouseEnter = (e) =>
     {       
-        if(headerState === "Wall" && e.buttons === 1)
+        if(headerState === CELL_WALL_STATE && e.buttons === 1)
         {
-            if(cell.state === "Wall")
+            if(cell.state === CELL_WALL_STATE)
             {
-                cell.state = "None";
+                cell.state = NO_STATE;
                 setUpdateCellState(updateCellState + 1);
                 
             }
             else if(!startCell && !finishCell)
             {
-                cell.state = "Wall";
+                cell.state = CELL_WALL_STATE;
                 setUpdateCellState(updateCellState + 1);
                 
             }
         }
-        else if(headerState === "Weight" && e.buttons === 1)
+        else if(headerState === WEIGHT_ONE_STATE && e.buttons === 1)
         {
-            if(cell.state === "Weight")
+            if(cell.state === WEIGHT_ONE_STATE)
             {
-                cell.state = "None";
+                cell.state = NO_STATE;
                 setUpdateCellState(updateCellState + 1);
             }
             else if(!startCell && !finishCell)
             {
-                cell.state = "Weight";
+                cell.state = WEIGHT_ONE_STATE;
                 setUpdateCellState(updateCellState + 1);
             }
         }       

@@ -28,7 +28,7 @@
     background-color:  rgb(100, 100, 100);
 }
 
-.Cell__Weight {
+.Cell__WeightOne {
     background-color: rgb(44, 130, 241);
 }
 
@@ -36,7 +36,7 @@
     background-color: gold;
 }
 
-.Cell__Wall {
+.Cell__CellWall {
     background-color: black;
 }
 

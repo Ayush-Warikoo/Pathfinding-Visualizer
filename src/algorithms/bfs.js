@@ -1,5 +1,5 @@
 import store from '../index';
-import {NUM_ROW, NUM_COL} from '../constants';
+import {NUM_ROW, NUM_COL, CELL_WALL_STATE} from '../constants';
 
 //Calculates orderedVisitedCells and pathCells, returns false for pathCells if no path exists 
 const bfsAlgo = (grid) => 
@@ -69,7 +69,7 @@ const setVisitedArray = () =>
 const directionCheck = (row, col, newPath, visitedArray, grid, cellQueue, pathQueue, finishCellCoord) =>
 {
     if(!visitedArray[row][col] && 
-        (grid[row][col].state !== "Wall" || (row === finishCellCoord[0] && col === finishCellCoord[1])))
+        (grid[row][col].state !== CELL_WALL_STATE || (row === finishCellCoord[0] && col === finishCellCoord[1])))
     {
         let newCell = grid[row][col];
         visitedArray[row][col] = true;
