@@ -32,6 +32,10 @@
     background-color: rgb(44, 130, 241);
 }
 
+.Cell__WeightTwo {
+    background-color: rgb(20, 83, 167);
+}
+
 .Cell__Path {
     background-color: gold;
 }

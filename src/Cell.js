@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './Cell.css';
 import {useSelector, useDispatch} from 'react-redux';
 import { setStart, setFinish } from './action/index';
-import {CELL_WALL_STATE, WEIGHT_ONE_STATE, NO_STATE} from './constants';
+import {CELL_WALL_STATE, WEIGHT_ONE_STATE, WEIGHT_TWO_STATE, NO_STATE} from './constants';
 
 function Cell({ cell }) {
     //Store Values
@@ -20,6 +20,19 @@ function Cell({ cell }) {
     const isFinishCell = () =>
     {
         return (cell.row === finishCellCoord[0] && cell.col === finishCellCoord[1]);
+    }
+
+    const handleUpdatingCellState = (state) => {
+        if(cell.state === state)
+        {
+            cell.state = NO_STATE;
+            setUpdateCellState(updateCellState + 1);
+        }
+        else if(!startCell && !finishCell)
+        {
+            cell.state = state;
+            setUpdateCellState(updateCellState + 1);
+        }
     }
 
     //States
@@ -43,65 +56,18 @@ function Cell({ cell }) {
 
     const onMouseDown = (e) =>
     {
-        if(headerState === CELL_WALL_STATE && e.buttons === 1)
+        if(e.buttons === 1 && (headerState === CELL_WALL_STATE || headerState === WEIGHT_ONE_STATE || headerState === WEIGHT_TWO_STATE))
         {
-            if(cell.state === CELL_WALL_STATE)
-            {
-                cell.state = NO_STATE;
-                setUpdateCellState(updateCellState + 1);
-                
-            }
-            else if(!startCell && !finishCell)
-            {
-                cell.state = CELL_WALL_STATE;
-                setUpdateCellState(updateCellState + 1);
-            }
-        }
-        else if(headerState === WEIGHT_ONE_STATE && e.buttons === 1)
-        {
-            if(cell.state === WEIGHT_ONE_STATE)
-            {
-                cell.state = NO_STATE;
-                setUpdateCellState(updateCellState + 1);   
-            }
-            else if(!startCell && !finishCell)
-            {
-                cell.state = WEIGHT_ONE_STATE;
-                setUpdateCellState(updateCellState + 1);
-            }
+            handleUpdatingCellState(headerState);
         }
     }
 
     const onMouseEnter = (e) =>
-    {       
-        if(headerState === CELL_WALL_STATE && e.buttons === 1)
+    {   
+        if(e.buttons === 1 && (headerState === CELL_WALL_STATE || headerState === WEIGHT_ONE_STATE || headerState === WEIGHT_TWO_STATE))
         {
-            if(cell.state === CELL_WALL_STATE)
-            {
-                cell.state = NO_STATE;
-                setUpdateCellState(updateCellState + 1);
-                
-            }
-            else if(!startCell && !finishCell)
-            {
-                cell.state = CELL_WALL_STATE;
-                setUpdateCellState(updateCellState + 1);
-                
-            }
-        }
-        else if(headerState === WEIGHT_ONE_STATE && e.buttons === 1)
-        {
-            if(cell.state === WEIGHT_ONE_STATE)
-            {
-                cell.state = NO_STATE;
-                setUpdateCellState(updateCellState + 1);
-            }
-            else if(!startCell && !finishCell)
-            {
-                cell.state = WEIGHT_ONE_STATE;
-                setUpdateCellState(updateCellState + 1);
-            }
-        }       
+            handleUpdatingCellState(headerState);
+        }          
     }
 
     const onMouseUp = (e) =>

@@ -93,7 +93,7 @@ function Header({ grid, clear }) {
                     <div className={"Header__WeightOne" + setSelectedStateClass(WEIGHT_ONE_STATE)} onClick={() => dispatch(headerSelect(WEIGHT_ONE_STATE))}> 
                         <h3> Weight One </h3>
                     </div>
-                    <div className={"Header__WeightTwo" + setSelectedStateClass(WEIGHT_TWO_STATE)}> 
+                    <div className={"Header__WeightTwo" + setSelectedStateClass(WEIGHT_TWO_STATE)} onClick={() => dispatch(headerSelect(WEIGHT_TWO_STATE))}> 
                         <h3> Weight Two </h3>
                     </div>
                 </div>     

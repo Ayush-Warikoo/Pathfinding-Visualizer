@@ -1,5 +1,5 @@
 import store from '../index';
-import {NUM_ROW, NUM_COL, WEIGHT_VALUE, CELL_WALL_STATE, WEIGHT_ONE_STATE} from '../constants';
+import {NUM_ROW, NUM_COL, WEIGHT_ONE_VALUE, WEIGHT_TWO_VALUE, CELL_WALL_STATE, WEIGHT_ONE_STATE, WEIGHT_TWO_STATE} from '../constants';
 
 //Calculates orderedVisitedCells and orderedPathCells, returns false for pathCells if no path exists 
 const dijkstraAlgo = (grid) => 
@@ -104,7 +104,11 @@ const setDijkstraTable = (grid, startCoord, finishCoord) =>
 
             if(grid[r][c].state === WEIGHT_ONE_STATE)
             {
-                weightValue = WEIGHT_VALUE;
+                weightValue = WEIGHT_ONE_VALUE;
+            }
+            if(grid[r][c].state === WEIGHT_TWO_STATE)
+            {
+                weightValue = WEIGHT_TWO_VALUE;
             }
             else if(grid[r][c].state === CELL_WALL_STATE)
             {
