@@ -2,4 +2,6 @@
     margin-top: 2vw;
     min-width: 1350px;
     margin-bottom: 2vw;
+    display: inline-block;
+    border: 2px solid black;
 }

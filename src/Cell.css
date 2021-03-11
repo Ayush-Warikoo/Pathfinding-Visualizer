@@ -1,8 +1,8 @@
 .Cell {
     align-self: center;
-    border: 1px solid black;
-    height: 1.8vw;
-    width: 1.8vw;
+    border: 1.7px solid black;
+    height: 1.75vw;
+    width: 1.75vw;
     background-color: rgb(200, 200, 200);
     display: inline-block;
     margin-bottom: -4px;
@@ -52,3 +52,18 @@
     background-color: green;
 }
 
+.Cell__TopWall {
+    border-top-color: red;
+}
+
+.Cell__RightWall {
+    border-right-color: red;
+}
+
+.Cell__LeftWall {
+    border-left-color: red;
+}
+
+.cell__BottomWall {
+    border-bottom-color: red;
+}

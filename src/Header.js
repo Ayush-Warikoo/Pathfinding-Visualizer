@@ -77,12 +77,10 @@ function Header({ grid, clear }) {
                     <div className="Header__WallsTitle"> 
                         <h2> Walls </h2>
                     </div>
-                    <div 
-                        className={"Header__CellWall" + setSelectedStateClass(CELL_WALL_STATE)} 
-                        onClick={() => dispatch(headerSelect(CELL_WALL_STATE))}> 
+                    <div className={"Header__CellWall" + setSelectedStateClass(CELL_WALL_STATE)} onClick={() => dispatch(headerSelect(CELL_WALL_STATE))}> 
                         <h3> Block Wall </h3>
                     </div>
-                    <div className={"Header__BorderWall" + setSelectedStateClass(BORDER_WALL_STATE)}>
+                    <div className={"Header__BorderWall" + setSelectedStateClass(BORDER_WALL_STATE)} onClick={() => dispatch(headerSelect(BORDER_WALL_STATE))}>
                         <h3> Border Wall </h3> 
                     </div>
                 </div>
@@ -90,7 +88,8 @@ function Header({ grid, clear }) {
                     <div className="Header__WeightsTitle"> 
                         <h2> Weights </h2>
                     </div>
-                    <div className={"Header__WeightOne" + setSelectedStateClass(WEIGHT_ONE_STATE)} onClick={() => dispatch(headerSelect(WEIGHT_ONE_STATE))}> 
+                    <div 
+                        className={"Header__WeightOne" + setSelectedStateClass(WEIGHT_ONE_STATE)} onClick={() => dispatch(headerSelect(WEIGHT_ONE_STATE))}> 
                         <h3> Weight One </h3>
                     </div>
                     <div className={"Header__WeightTwo" + setSelectedStateClass(WEIGHT_TWO_STATE)} onClick={() => dispatch(headerSelect(WEIGHT_TWO_STATE))}> 
