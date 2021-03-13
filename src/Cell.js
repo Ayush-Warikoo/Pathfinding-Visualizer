@@ -4,44 +4,45 @@ import {useSelector, useDispatch} from 'react-redux';
 import { setStart, setFinish } from './action/index';
 import {CELL_WALL_STATE, WEIGHT_ONE_STATE, WEIGHT_TWO_STATE, NO_STATE} from './constants';
 
-function Cell({ cell }) {
+function Cell({ cellProp, updateCell }) {
     //Store Values
     let headerState = useSelector(state => state.headerState);
     let startCellCoord = useSelector(state => state.startCell);
     let finishCellCoord = useSelector(state => state.finishCell);
-    let forceUpdate = useSelector(state => state.forceUpdate);
 
     //Helper functions
     const isStartCell = () =>
     {
-        return (cell.row === startCellCoord[0] && cell.col === startCellCoord[1]);
+        return (cellProp.row === startCellCoord[0] && cellProp.col === startCellCoord[1]);
     }
 
     const isFinishCell = () =>
     {
-        return (cell.row === finishCellCoord[0] && cell.col === finishCellCoord[1]);
-    }
-
-    const handleUpdatingCellState = (state) => {
-        if(cell.state === state)
-        {
-            cell.state = NO_STATE;
-            setUpdateCellState(updateCellState + 1);
-        }
-        else if(!startCell && !finishCell)
-        {
-            cell.state = state;
-            setUpdateCellState(updateCellState + 1);
-        }
+        return (cellProp.row === finishCellCoord[0] && cellProp.col === finishCellCoord[1]);
     }
 
     //States
     const [startCell, setStartCell] = useState(isStartCell());
     const [finishCell, setFinishCell] = useState(isFinishCell());
-    const [updateCellState, setUpdateCellState] = useState(0);
+    const [cellState, setCellState] = useState(cellProp);
     const dispatch = useDispatch();
 
     //Event handling functions 
+    const handleUpdatingCellState = (state) => {
+        if(cellProp.state === state)
+        {
+            cellProp.state = NO_STATE;
+            cellState.state = NO_STATE;
+            setCellState({...cellState});
+        }
+        else if(!startCell && !finishCell)
+        {
+            cellProp.state = state;
+            cellState.state = state;
+            setCellState({...cellState});
+        }
+    }
+
     useEffect(() => {
         
         if(startCell && !isStartCell())
@@ -75,12 +76,12 @@ function Cell({ cell }) {
         if(headerState === "Start" && !finishCell)
         {
             setStartCell(true);
-            dispatch(setStart([cell.row, cell.col]));
+            dispatch(setStart([cellProp.row, cellProp.col]));
         }
         else if(headerState === "Finish" && !startCell)
         {
             setFinishCell(true);
-            dispatch(setFinish([cell.row, cell.col]));
+            dispatch(setFinish([cellProp.row, cellProp.col]));
         }   
     }
 
@@ -95,12 +96,12 @@ function Cell({ cell }) {
         {
             return "Finish";
         }
-        return cell.state;
+        return cellProp.state;
     }
 
     const setVisitedClass = () =>
     {
-        if(cell.visited)
+        if(cellProp.visited)
         {
             return "Visited";
         }
@@ -110,7 +111,7 @@ function Cell({ cell }) {
     const setPathClass = () =>
     {
         
-        if(cell.path)
+        if(cellProp.path)
         {
             return "Path";
         }

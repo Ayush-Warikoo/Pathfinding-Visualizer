@@ -8,6 +8,13 @@ function MainPage() {
     const [grid, setGrid] = useState([]);
     const [clearBoard, setClearBoard] = useState(0);
 
+    const updateCell = (cell) => {
+
+        let newGrid = grid.map(arr => arr.slice());
+        newGrid[cell.row][cell.col] = cell;
+        setGrid(newGrid);
+    }
+
     useEffect(() => {
         let grid = [];
         for(let r = 0; r < NUM_ROW; r++)
@@ -42,7 +49,7 @@ function MainPage() {
                 {grid.map((row, indexR) => {
                     return (
                         <div className="Grid__Row"> 
-                            {row.map((col, indexC) => <Cell cell = {grid[indexR][indexC]}/>)} 
+                            {row.map((col, indexC) => <Cell cellProp = {grid[indexR][indexC]} updateCell={updateCell} />)} 
                         </div>
                     )
                 })}
