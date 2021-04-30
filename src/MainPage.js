@@ -8,8 +8,8 @@ function MainPage() {
     const [grid, setGrid] = useState([]);
     const [clearBoard, setClearBoard] = useState(0);
 
+    //TODO: Figure out how to update the cells using lifting
     const updateCell = (cell) => {
-
         let newGrid = grid.map(arr => arr.slice());
         newGrid[cell.row][cell.col] = cell;
         setGrid(newGrid);
@@ -22,7 +22,6 @@ function MainPage() {
             let currRow = [];
             for(let c = 0; c < NUM_COL; c++)
             {
-                //State can be None, Wall or Weight
                 let cell = {
                     row: r,
                     col: c,
@@ -36,6 +35,8 @@ function MainPage() {
         }
         setGrid(grid);
     }, [clearBoard])
+
+
 
     const clear = () =>
     {

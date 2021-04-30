@@ -23,5 +23,3 @@ export const WALLS_TITLE = "Walls";
 export const WEIGHTS_TITLE = "Weights";
 
 //Colours
-
-
