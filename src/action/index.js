@@ -1,33 +1,28 @@
 //Action: Describes what action you are trying to do
-export const headerSelect = (newState) =>
-{
+export const headerSelect = (newState) => {
     return {
-        type: 'HEADER_SELECT',
-        payload: newState
+        type: "HEADER_SELECT",
+        payload: newState,
     };
 };
 
-export const setStart = (newState) =>
-{
+export const setStart = (newState) => {
     return {
-        type: 'SET_START',
-        payload: newState
-    }
-}
+        type: "SET_START",
+        payload: newState,
+    };
+};
 
-export const setFinish = (newState) =>
-{
+export const setFinish = (newState) => {
     return {
-        type: 'SET_FINISH',
-        payload: newState
-    }
-}
+        type: "SET_FINISH",
+        payload: newState,
+    };
+};
 
-export const forceUpdate = (newState) =>
-{
+export const forceUpdate = (newState) => {
     return {
-        type: 'FORCE_UPDATE',
-        payload: newState
-    }
-}
-
+        type: "FORCE_UPDATE",
+        payload: newState,
+    };
+};

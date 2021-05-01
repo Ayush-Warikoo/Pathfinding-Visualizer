@@ -6,10 +6,10 @@ import forceUpdate from "./forceUpdate";
 import { combineReducers } from "redux";
 
 const allReducers = combineReducers({
-  headerState,
-  startCell,
-  finishCell,
-  forceUpdate,
+    headerState,
+    startCell,
+    finishCell,
+    forceUpdate,
 });
 
 export default allReducers;
