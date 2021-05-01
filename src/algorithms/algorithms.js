@@ -1,11 +1,10 @@
 import { headerSelect } from "../action/index";
-import { forceUpdate } from "../action/index";
 import store from "../index";
 import bfsAlgo from "./bfs";
 import dijkstraAlgo from "./dijkstra";
 import { NO_STATE, ANIMATE_VISIT_SPEED, ANIMATE_PATH_SPEED } from "../constants";
 
-const algorithmManager = async (grid, algo) => {
+const algorithmManager = async (grid, algo, updateCell) => {
     store.dispatch(headerSelect(NO_STATE));
     let orderedVisitedCells;
     let pathCells;
@@ -16,18 +15,18 @@ const algorithmManager = async (grid, algo) => {
     } else {
         return;
     }
-    await animateVisitedCells(orderedVisitedCells);
-    await animatePathCells(pathCells);
+    await animateVisitedCells(orderedVisitedCells, updateCell);
+    await animatePathCells(pathCells, updateCell);
     resetGrid(grid);
 };
 
-const animateVisitedCells = (orderedVisitedCells) => {
+const animateVisitedCells = (orderedVisitedCells, updateCell) => {
     return new Promise((resolve, reject) => {
         for (let i = 0; i < orderedVisitedCells.length; i++) {
             setTimeout(() => {
                 const cell = orderedVisitedCells[i];
                 cell.visited = true;
-                store.dispatch(forceUpdate(i));
+                updateCell(cell);
                 if (i === orderedVisitedCells.length - 1) {
                     resolve();
                 }
@@ -36,7 +35,7 @@ const animateVisitedCells = (orderedVisitedCells) => {
     });
 };
 
-const animatePathCells = (pathCells) => {
+const animatePathCells = (pathCells, updateCell) => {
     if (pathCells === false) {
         alert("Impossible to path from start to finish!");
         return;
@@ -46,7 +45,7 @@ const animatePathCells = (pathCells) => {
             setTimeout(() => {
                 const cell = pathCells[i];
                 cell.path = true;
-                store.dispatch(forceUpdate(i));
+                updateCell(cell);
                 if (i === pathCells.length - 1) {
                     resolve();
                 }

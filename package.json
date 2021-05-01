@@ -19,7 +19,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "format": "npx prettier --write **/*.js --write **/*.css"
+        "format": "npx prettier --write **/*.js **/*.css"
     },
     "eslintConfig": {
         "extends": [

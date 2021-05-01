@@ -13,9 +13,10 @@ import {
     WALLS_TITLE,
     WEIGHTS_TITLE,
     PATH_CELLS_TITLE,
+    NO_STATE,
 } from "./constants";
 
-function Header({ grid, clear }) {
+function Header({ grid, clear, updateCell }) {
     const [algorithm, setAlgorithm] = useState(null);
 
     const dispatch = useDispatch();
@@ -56,16 +57,15 @@ function Header({ grid, clear }) {
                 </div>
                 <div className="Header__Algorithms">
                     <select type="diet" onChange={(e) => setAlgorithm(e.target.value)}>
-                        <option class="default" selected disabled hidden>
-                            {" "}
-                            Pick an Algorithm!{" "}
+                        <option className="default" selected disabled hidden>
+                            Pick an Algorithm!
                         </option>
-                        <option class="Bfs"> Bfs </option>
-                        <option class="Dijkstra"> Dijkstra </option>
+                        <option className="Bfs"> Bfs </option>
+                        <option className="Dijkstra"> Dijkstra </option>
                     </select>
                 </div>
                 <div className="Header__RunProgram">
-                    <button disabled={!algorithm} onClick={() => algorithmManager(grid, algorithm)}>
+                    <button disabled={!algorithm} onClick={() => algorithmManager(grid, algorithm, updateCell)}>
                         {!algorithm ? `Pick an Algorithm!` : `Run ${algorithm}`}
                     </button>
                 </div>

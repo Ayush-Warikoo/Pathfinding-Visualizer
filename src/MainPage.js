@@ -15,6 +15,10 @@ function MainPage() {
         setGrid(newGrid);
     };
 
+    const clear = () => {
+        setClearBoard(clearBoard + 1);
+    };
+
     useEffect(() => {
         let grid = [];
         for (let r = 0; r < NUM_ROW; r++) {
@@ -34,19 +38,19 @@ function MainPage() {
         setGrid(grid);
     }, [clearBoard]);
 
-    const clear = () => {
-        setClearBoard(clearBoard + 1);
-    };
-
     return (
         <div className="MainPage">
-            <Header grid={grid} clear={clear} />
+            <Header grid={grid} clear={clear} updateCell={updateCell}/>
             <div className="Grid">
                 {grid.map((row, indexR) => {
                     return (
-                        <div className="Grid__Row">
+                        <div key={indexR} className="Grid__Row">
                             {row.map((col, indexC) => (
-                                <Cell cellProp={grid[indexR][indexC]} updateCell={updateCell} />
+                                <Cell
+                                    key={indexR + ", " + indexC}
+                                    cellProp={grid[indexR][indexC]}
+                                    updateCell={updateCell}
+                                />
                             ))}
                         </div>
                     );
