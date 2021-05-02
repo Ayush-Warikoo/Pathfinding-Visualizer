@@ -17,7 +17,6 @@ const algorithmManager = async (grid, algo, updateCell) => {
     }
     await animateVisitedCells(orderedVisitedCells, updateCell);
     await animatePathCells(pathCells, updateCell);
-    resetGrid(grid);
 };
 
 const animateVisitedCells = (orderedVisitedCells, updateCell) => {
@@ -54,14 +53,5 @@ const animatePathCells = (pathCells, updateCell) => {
     });
 };
 
-const resetGrid = (grid) => {
-    for (let r = 0; r < grid.length; r++) {
-        for (let c = 0; c < grid[r].length; c++) {
-            grid[r][c].visited = false;
-            grid[r][c].path = false;
-        }
-    }
-    return;
-};
 
 export default algorithmManager;

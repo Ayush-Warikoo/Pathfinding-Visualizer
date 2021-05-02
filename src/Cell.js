@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setStart, setFinish } from "./action/index";
 import { CELL_WALL_STATE, WEIGHT_ONE_STATE, WEIGHT_TWO_STATE, NO_STATE } from "./constants";
 
-function Cell({ cellProp, updateCell }) {
+const Cell  = React.memo( ({ cellProp, updateCell}) => {
     //Store Values
     let headerState = useSelector((state) => state.headerState);
     let startCellCoord = useSelector((state) => state.startCell);
@@ -22,19 +22,16 @@ function Cell({ cellProp, updateCell }) {
     //States
     const [startCell, setStartCell] = useState(isStartCell());
     const [finishCell, setFinishCell] = useState(isFinishCell());
-    const [cellState, setCellState] = useState(cellProp);
     const dispatch = useDispatch();
 
     //Event handling functions
     const handleUpdatingCellState = (state) => {
         if (cellProp.state === state) {
             cellProp.state = NO_STATE;
-            cellState.state = NO_STATE;
-            setCellState({ ...cellState });
+            updateCell(cellProp);
         } else if (!startCell && !finishCell) {
             cellProp.state = state;
-            cellState.state = state;
-            setCellState({ ...cellState });
+            updateCell(cellProp);
         }
     };
 
@@ -118,6 +115,11 @@ function Cell({ cellProp, updateCell }) {
             onMouseUp={onMouseUp}
         ></div>
     );
-}
+}, (prevProps, nextProps) => {
+    if(prevProps.cellProp === nextProps.cellProp) {
+        return true;
+    }
+    return false;
+});
 
 export default Cell;

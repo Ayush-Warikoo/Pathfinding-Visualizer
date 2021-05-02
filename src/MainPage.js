@@ -6,17 +6,34 @@ import { NUM_COL, NUM_ROW, NO_STATE } from "./constants";
 
 function MainPage() {
     const [grid, setGrid] = useState([]);
-    const [clearBoard, setClearBoard] = useState(0);
+    const [clearBoard, setClearBoard] = useState({});
 
-    //TODO: Figure out how to update the cells using lifting
     const updateCell = (cell) => {
-        let newGrid = grid.map((arr) => arr.slice());
-        newGrid[cell.row][cell.col] = cell;
-        setGrid(newGrid);
+        setGrid((prevGrid) => {
+            let newGrid = prevGrid.map((arr) => arr.slice());
+            newGrid[cell.row][cell.col] = {...cell};
+            return newGrid;
+        })
+    };
+
+    //Run before facilitating any user action
+    const unanimateGrid = () => {
+        for (let r = 0; r < NUM_ROW; r++) {
+            for (let c = 0; c < NUM_COL; c++) {
+                setGrid((prevGrid) => {
+                    prevGrid[r][c].visited = false;
+                    prevGrid[r][c].path = false;
+                    let newGrid = prevGrid.map((arr) => arr.slice());
+                    newGrid[r][c] = {...prevGrid[r][c]};
+                    return newGrid;
+                })
+            }
+        }
+        return;
     };
 
     const clear = () => {
-        setClearBoard(clearBoard + 1);
+        setClearBoard({});
     };
 
     useEffect(() => {
@@ -40,18 +57,18 @@ function MainPage() {
 
     return (
         <div className="MainPage">
-            <Header grid={grid} clear={clear} updateCell={updateCell}/>
+            <Header grid={grid} clear={clear} updateCell={updateCell} unanimateGrid={unanimateGrid}/>
             <div className="Grid">
                 {grid.map((row, indexR) => {
                     return (
                         <div key={indexR} className="Grid__Row">
-                            {row.map((col, indexC) => (
+                            {row.map((col, indexC) => 
                                 <Cell
                                     key={indexR + ", " + indexC}
                                     cellProp={grid[indexR][indexC]}
                                     updateCell={updateCell}
                                 />
-                            ))}
+                            )}
                         </div>
                     );
                 })}

@@ -16,7 +16,7 @@ import {
     NO_STATE,
 } from "./constants";
 
-function Header({ grid, clear, updateCell }) {
+function Header({ grid, clear, updateCell, unanimateGrid }) {
     const [algorithm, setAlgorithm] = useState(null);
 
     const dispatch = useDispatch();
@@ -65,7 +65,10 @@ function Header({ grid, clear, updateCell }) {
                     </select>
                 </div>
                 <div className="Header__RunProgram">
-                    <button disabled={!algorithm} onClick={() => algorithmManager(grid, algorithm, updateCell)}>
+                    <button disabled={!algorithm} onClick={() => {
+                        unanimateGrid();
+                        return algorithmManager(grid, algorithm, updateCell)
+                    }}>
                         {!algorithm ? `Pick an Algorithm!` : `Run ${algorithm}`}
                     </button>
                 </div>
@@ -78,13 +81,19 @@ function Header({ grid, clear, updateCell }) {
                     </div>
                     <div
                         className={"Header__StartCell" + setSelectedStateClass(START_STATE)}
-                        onClick={() => dispatch(headerSelect(START_STATE))}
+                        onClick={() => {
+                            unanimateGrid();
+                            return dispatch(headerSelect(START_STATE));
+                        }} 
                     >
                         <h3> Start Cell </h3>
                     </div>
                     <div
                         className={"Header__FinishCell" + setSelectedStateClass(FINISH_STATE)}
-                        onClick={() => dispatch(headerSelect(FINISH_STATE))}
+                        onClick={() => {
+                            unanimateGrid();
+                            return dispatch(headerSelect(FINISH_STATE));
+                        }}
                     >
                         <h3> Finish Cell </h3>
                     </div>
@@ -95,13 +104,19 @@ function Header({ grid, clear, updateCell }) {
                     </div>
                     <div
                         className={"Header__CellWall" + setSelectedStateClass(CELL_WALL_STATE)}
-                        onClick={() => dispatch(headerSelect(CELL_WALL_STATE))}
+                        onClick={() => {
+                            unanimateGrid();
+                            return dispatch(headerSelect(CELL_WALL_STATE));
+                        }}
                     >
                         <h3> Block Wall </h3>
                     </div>
                     <div
                         className={"Header__BorderWall" + setSelectedStateClass(BORDER_WALL_STATE)}
-                        onClick={() => dispatch(headerSelect(BORDER_WALL_STATE))}
+                        onClick={() => {
+                            unanimateGrid();
+                            return dispatch(headerSelect(BORDER_WALL_STATE));
+                        }}
                     >
                         <h3> Border Wall </h3>
                     </div>
@@ -112,13 +127,19 @@ function Header({ grid, clear, updateCell }) {
                     </div>
                     <div
                         className={"Header__WeightOne" + setSelectedStateClass(WEIGHT_ONE_STATE)}
-                        onClick={() => dispatch(headerSelect(WEIGHT_ONE_STATE))}
+                        onClick={() => {
+                            unanimateGrid();
+                            return dispatch(headerSelect(WEIGHT_ONE_STATE));
+                        }}
                     >
                         <h3> Weight One </h3>
                     </div>
                     <div
                         className={"Header__WeightTwo" + setSelectedStateClass(WEIGHT_TWO_STATE)}
-                        onClick={() => dispatch(headerSelect(WEIGHT_TWO_STATE))}
+                        onClick={() => {
+                            unanimateGrid();
+                            return dispatch(headerSelect(WEIGHT_TWO_STATE));
+                        }}
                     >
                         <h3> Weight Two </h3>
                     </div>

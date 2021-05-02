@@ -5,7 +5,7 @@ export const WEIGHT_ONE_VALUE = 5;
 export const WEIGHT_TWO_VALUE = 10;
 export const INIT_START_CORD = [0, 0];
 export const INIT_FINISH_CORD = [NUM_ROW - 1, NUM_COL - 1];
-export const ANIMATE_VISIT_SPEED = 20;
+export const ANIMATE_VISIT_SPEED = 10;
 export const ANIMATE_PATH_SPEED = 100;
 
 //States
