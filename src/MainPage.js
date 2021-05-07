@@ -11,9 +11,9 @@ function MainPage() {
     const updateCell = (cell) => {
         setGrid((prevGrid) => {
             let newGrid = prevGrid.map((arr) => arr.slice());
-            newGrid[cell.row][cell.col] = {...cell};
+            newGrid[cell.row][cell.col] = { ...cell };
             return newGrid;
-        })
+        });
     };
 
     //Run before facilitating any user action
@@ -24,9 +24,9 @@ function MainPage() {
                     prevGrid[r][c].visited = false;
                     prevGrid[r][c].path = false;
                     let newGrid = prevGrid.map((arr) => arr.slice());
-                    newGrid[r][c] = {...prevGrid[r][c]};
+                    newGrid[r][c] = { ...prevGrid[r][c] };
                     return newGrid;
-                })
+                });
             }
         }
         return;
@@ -45,6 +45,7 @@ function MainPage() {
                     row: r,
                     col: c,
                     state: NO_STATE,
+                    borderWall: [],
                     visited: false,
                     path: false,
                 };
@@ -57,18 +58,23 @@ function MainPage() {
 
     return (
         <div className="MainPage">
-            <Header grid={grid} clear={clear} updateCell={updateCell} unanimateGrid={unanimateGrid}/>
+            <Header
+                grid={grid}
+                clear={clear}
+                updateCell={updateCell}
+                unanimateGrid={unanimateGrid}
+            />
             <div className="Grid">
                 {grid.map((row, indexR) => {
                     return (
                         <div key={indexR} className="Grid__Row">
-                            {row.map((col, indexC) => 
+                            {row.map((col, indexC) => (
                                 <Cell
                                     key={indexR + ", " + indexC}
                                     cellProp={grid[indexR][indexC]}
                                     updateCell={updateCell}
                                 />
-                            )}
+                            ))}
                         </div>
                     );
                 })}

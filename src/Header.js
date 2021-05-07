@@ -65,10 +65,13 @@ function Header({ grid, clear, updateCell, unanimateGrid }) {
                     </select>
                 </div>
                 <div className="Header__RunProgram">
-                    <button disabled={!algorithm} onClick={() => {
-                        unanimateGrid();
-                        return algorithmManager(grid, algorithm, updateCell)
-                    }}>
+                    <button
+                        disabled={!algorithm}
+                        onClick={() => {
+                            unanimateGrid();
+                            return algorithmManager(grid, algorithm, updateCell);
+                        }}
+                    >
                         {!algorithm ? `Pick an Algorithm!` : `Run ${algorithm}`}
                     </button>
                 </div>
@@ -84,7 +87,7 @@ function Header({ grid, clear, updateCell, unanimateGrid }) {
                         onClick={() => {
                             unanimateGrid();
                             return dispatch(headerSelect(START_STATE));
-                        }} 
+                        }}
                     >
                         <h3> Start Cell </h3>
                     </div>
@@ -119,6 +122,56 @@ function Header({ grid, clear, updateCell, unanimateGrid }) {
                         }}
                     >
                         <h3> Border Wall </h3>
+                        <div>
+                            <div
+                                className={"Header__TopWall"}
+                                style={{
+                                    border: "1px black solid",
+                                    height: "20px",
+                                    width: "20px",
+                                    display: "inline-block",
+                                }}
+                                onClick={() => {
+                                    return dispatch(headerSelect(BORDER_WALL_STATE));
+                                }}
+                            ></div>
+                            <div
+                                className={"Header__RightWall"}
+                                style={{
+                                    border: "1px black solid",
+                                    height: "20px",
+                                    width: "20px",
+                                    display: "inline-block",
+                                }}
+                                onClick={() => {
+                                    return dispatch(headerSelect(BORDER_WALL_STATE));
+                                }}
+                            ></div>
+                            <div
+                                className={"Header__BottomWall"}
+                                style={{
+                                    border: "1px black solid",
+                                    height: "20px",
+                                    width: "20px",
+                                    display: "inline-block",
+                                }}
+                                onClick={() => {
+                                    return dispatch(headerSelect(BORDER_WALL_STATE));
+                                }}
+                            ></div>
+                            <div
+                                className={"Header__LeftWall"}
+                                style={{
+                                    border: "1px black solid",
+                                    height: "20px",
+                                    width: "20px",
+                                    display: "inline-block",
+                                }}
+                                onClick={() => {
+                                    return dispatch(headerSelect(BORDER_WALL_STATE));
+                                }}
+                            ></div>
+                        </div>
                     </div>
                 </div>
                 <div className={"Header__Weights" + setSelectedTitleClass(WEIGHTS_TITLE)}>

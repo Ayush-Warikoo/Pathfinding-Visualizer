@@ -53,5 +53,4 @@ const animatePathCells = (pathCells, updateCell) => {
     });
 };
 
-
 export default algorithmManager;

@@ -1,22 +1,35 @@
+:root {
+    --none: rgb(75, 191, 241);
+    --cornerSize: 5%;
+    --visited: rgb(40, 133, 173); /*rgb(49, 186, 245)*/
+    --path: gold;
+    --wall: black;
+    --borderWallSize: 15%;
+    --weightOne: rgb(216, 199, 255);
+    --weightTwo: rgb(155, 109, 255);
+
+    --transparent: rgba(0, 0, 0, 0);
+}
+
 .Cell {
     align-self: center;
-    border: 1px solid black;
+    border: 0.5px solid black;
     height: 1.75vw;
     width: 1.75vw;
-    background-color: rgb(200, 200, 200);
     display: inline-block;
     margin-bottom: -4px;
     min-width: 25px;
     min-height: 25px;
+    position: relative;
+    /* background: linear-gradient(to top, var(--wall) var(--borderWallSize) var(--transparent) var(--borderWallSize)); */
 }
-
-/*
-.Cell:active {
-}
-*/
 
 .Cell__None {
-    background-color: rgb(200, 200, 200);
+    /* background:
+        black,
+        linear-gradient(to top, var(--transparent) var(--cornerSize), var(--none) var(--cornerSize), var(--none) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))),
+        linear-gradient(to right, var(--transparent) var(--cornerSize), var(--none) var(--cornerSize), var(--none) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))); */
+    background-color: var(--none);
 }
 
 /*
@@ -26,19 +39,35 @@
 */
 
 .Cell__Visited {
-    background-color: rgb(100, 100, 100);
+    /* background:
+        black,
+        linear-gradient(to top, var(--transparent) var(--cornerSize), var(--visited) var(--cornerSize), var(--visited) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))),
+        linear-gradient(to right, var(--transparent) var(--cornerSize), var(--visited) var(--cornerSize), var(--visited) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))); */
+    background-color: var(--visited);
 }
 
 .Cell__WeightOne {
-    background-color: rgb(44, 130, 241);
+    /* background:
+        black,
+        linear-gradient(to top, var(--transparent) var(--cornerSize), var(--weightOne) var(--cornerSize), var(--weightOne) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))),
+        linear-gradient(to right, var(--transparent) var(--cornerSize), var(--weightOne) var(--cornerSize), var(--weightOne) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))); */
+    background-color: var(--weightOne);
 }
 
 .Cell__WeightTwo {
-    background-color: rgb(20, 83, 167);
+    /* background:
+        black,
+        linear-gradient(to top, var(--transparent) var(--cornerSize), var(--weightTwo) var(--cornerSize), var(--weightTwo) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))),
+        linear-gradient(to right, var(--transparent) var(--cornerSize), var(--weightTwo) var(--cornerSize), var(--weightTwo) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))); */
+    background-color: var(--weightTwo);
 }
 
 .Cell__Path {
-    background-color: gold;
+    /* background:
+    black,
+    linear-gradient(to top, var(--transparent) var(--cornerSize), var(--path) var(--cornerSize), var(--path) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))),
+    linear-gradient(to right, var(--transparent) var(--cornerSize), var(--path) var(--cornerSize), var(--path) calc(100% - var(--cornerSize)), var(--transparent) calc(100% - var(--cornerSize))); */
+    background-color: var(--path);
 }
 
 .Cell__CellWall {
@@ -46,25 +75,41 @@
 }
 
 .Cell__Start {
-    background-color: red;
+    background: red;
 }
 
 .Cell__Finish {
-    background-color: green;
+    background: green;
 }
 
 .Cell__TopWall {
-    border-top-color: red;
+    background-image: linear-gradient(
+        to bottom,
+        var(--wall) var(--borderWallSize),
+        var(--transparent) var(--borderWallSize)
+    );
 }
 
 .Cell__RightWall {
-    border-right-color: red;
+    background-image: linear-gradient(
+        to left,
+        var(--wall) var(--borderWallSize),
+        var(--transparent) var(--borderWallSize)
+    );
 }
 
 .Cell__LeftWall {
-    border-left-color: red;
+    background-image: linear-gradient(
+        to right,
+        var(--wall) var(--borderWallSize),
+        var(--transparent) var(--borderWallSize)
+    );
 }
 
-.cell__BottomWall {
-    border-bottom-color: red;
+.Cell__BottomWall {
+    background-image: linear-gradient(
+        to top,
+        var(--wall) var(--borderWallSize),
+        var(--transparent) var(--borderWallSize)
+    );
 }
